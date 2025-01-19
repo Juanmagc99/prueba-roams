@@ -30,17 +30,17 @@ class Client(SQLModel, table=True):
     name: str = Field(max_length=100, nullable=False)
     dni: str = Field(max_length=9, min_length=9, nullable=False, unique=True)
     requested_capital: int = Field(gt=0, nullable=False)
-    mortages: list["Mortage"] = Relationship(back_populates="client", cascade_delete=True)
+    mortages: list["Mortgage"] = Relationship(back_populates="client", cascade_delete=True)
 
-class MortageCreate(BaseModel):
+class MortgageCreate(BaseModel):
     tae: float = Field(gt=0, nullable=False)
     installments: int = Field(gt=0, nullable=False)
 
-class Mortage(SQLModel, table=True):
+class Mortgage(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
     tae: float = Field(gt=0, nullable=False)
     installments: int = Field(gt=0, nullable=False)
     monthly_payment: float = Field(gt=0, nullable=False)
     total: float = Field(gt=0, nullable=False)
     client_id: int = Field(foreign_key="client.id", nullable=False, ondelete="CASCADE")
-    client: Client = Relationship(back_populates="mortages")
+    client: Client = Relationship(back_populates="mortgages")
