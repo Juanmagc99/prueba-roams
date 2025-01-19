@@ -1,7 +1,7 @@
 from typing import Annotated
 from fastapi import APIRouter, HTTPException, Query, Response
-from core.database import SessionDep
-from models import Client, ClientCreate, Mortgage, MortgageCreate
+from app.core.database import SessionDep
+from app.models import Client, ClientCreate, Mortgage, MortgageCreate
 from sqlmodel import select
 
 clients_router = APIRouter()
@@ -13,9 +13,9 @@ def read_client(client_id: int, session: SessionDep):
     if not client:
         raise HTTPException(status_code=404, detail="Client not found")
     
-    mortgages = session.exec(select(Mortage).where(Mortage.client_id == client_id)).all()
+    mortgages = session.exec(select(Mortgage).where(Mortgage.client_id == client_id)).all()
     
-    return {"client": client, "mortages": mortgages}
+    return {"client": client, "mortgages": mortgages}
 
 @clients_router.post("/clients")
 def create_client(client_data: ClientCreate, session: SessionDep):

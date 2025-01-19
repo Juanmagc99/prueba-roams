@@ -30,7 +30,7 @@ class Client(SQLModel, table=True):
     name: str = Field(max_length=100, nullable=False)
     dni: str = Field(max_length=9, min_length=9, nullable=False, unique=True)
     requested_capital: int = Field(gt=0, nullable=False)
-    mortages: list["Mortgage"] = Relationship(back_populates="client", cascade_delete=True)
+    mortgages: list["Mortgage"] = Relationship(back_populates="client", cascade_delete=True)
 
 class MortgageCreate(BaseModel):
     tae: float = Field(gt=0, nullable=False)
