@@ -66,7 +66,7 @@ def read_clients(
     
     return clients
 
-@clients_router.post("/{client_id}/simulate-mortgage")
+@clients_router.post("/clients/{client_id}/simulate-mortgage")
 def simulate_mortgage(client_id: int, mortgage_data: MortgageCreate, session: SessionDep):
     client = session.get(Client, client_id)
     if not client:
