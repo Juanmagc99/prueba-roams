@@ -1,7 +1,7 @@
 
 # Prueba roams
 
-Get the project using https://github.com/Juanmagc99/prueba-roams.git
+Get the project using `git clone https://github.com/Juanmagc99/prueba-roams.git`
 
 Ensure that you have Python 3.8 or a newer version installed.
 
